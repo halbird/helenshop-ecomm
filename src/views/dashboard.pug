@@ -1,0 +1,19 @@
+include head.pug
+include nav.pug
+
+body
+  if req.session.userId
+    h3 Welcome to your dashboard user number #{req.session.userId}
+  else
+    h3 Welcome newcomer, please make an account!
+  
+  ul
+    li 
+      a(href="/products") See products for sale
+    li 
+      a(href="/cart") See your cart
+    li 
+      a(href="/account") See your account
+    
+    
+    

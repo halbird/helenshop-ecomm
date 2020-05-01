@@ -1,0 +1,19 @@
+include ../head.pug
+- let sectionTitle= "Products"
+include ../nav.pug
+
+body
+  form(action="/products/" + results[0].id + "/edit", method="post")
+    label(for="title") Product Title
+    input(type="text" name="title" placeholder="Product Title" value=results[0].title)
+    label(for="title") Product Price
+    input(type="number" step="0.01" min="0" max="999999.99" name="price" placeholder="Price" value=results[0].price)
+    label(for="title") Product Image
+    input(type="text" name="img" placeholder="Image" value=results[0].img)
+    label(for="title") Product Inventory
+    input(type="number" min="0" max="10000" name="inventory" placeholder="Inventory" value=results[0].inventory)
+    button(type="submit") Submit
+  button
+    a(href= "/products/" + results[0].id) Cancel
+
+//- pre-fill the form with what is already in the db

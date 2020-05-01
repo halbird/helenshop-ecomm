@@ -1,0 +1,34 @@
+include head.pug
+- let sectionTitle= "Your Cart"
+include nav.pug
+
+- let cartTotal = 0
+body
+  if !results || results.length === 0
+    div
+      h2 Your cart is empty!
+  else
+    for result in results
+      - cartTotal += (result.price * result.quantity)
+      div
+        h2 #{result.title}
+        ul
+          li #{result.price}
+          li #{result.quantity}
+          li #{result.img}
+      div
+        form(action="/cart/product/increase", method="post")
+          input(type="hidden", name="productId", value=result.product_id)
+          button(type="submit") + 1 to cart
+      if result.quantity > 1
+        div
+          form(action="/cart/product/decrease", method="post")
+            input(type="hidden", name="productId", value=result.product_id)
+            button(type="submit") - 1 from cart
+      else
+        div
+          form(action="/cart/product/delete", method="post")
+            input(type="hidden", name="productId", value=result.product_id)
+            button(type="submit") - 1 from cart
+
+    h2 Total: #{cartTotal}

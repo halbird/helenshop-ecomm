@@ -1,0 +1,144 @@
+div.cover
+header
+  nav.nav-top.flex
+    div.contact.flex
+      ul.flex
+        li 
+          a(href="")
+            span
+              i.far.fa-envelope  anemail@email.com
+        li 
+          a(href="")
+            i.fas.fa-phone
+              span#phoneNum  888-888-8888
+    div.social.flex
+      ul.flex
+        li 
+          a(href="https://www.facebook.com")
+            i.fab.fa-facebook
+        li 
+          a(href="https://twitter.com")
+            i.fab.fa-twitter
+        li 
+          a(href="https://www.snapchat.com")
+            i.fab.fa-snapchat-ghost
+        li 
+          a(href="https://www.pinterest.com")
+            i.fab.fa-pinterest
+        li 
+          a(href="https://www.instagram.com")
+            i.fab.fa-instagram
+        li 
+          a(href="https://www.yelp.com")
+            i.fab.fa-yelp
+        li 
+          a(href="https://github.com/halbird")
+            i.fab.fa-github
+
+  nav.nav-middle.flex.mobile
+    div.brand
+      h3
+        a(href="/")
+          i.fas.fa-paw  helenshop
+    div.mobileNav.flex.closed
+      a(href="").menuToggle
+        i.fa.fa-bars
+      if !req.session
+        ul.flex.mobileMenu
+          li 
+            a(href="/products") Products
+          li 
+            a(href="/signup") Signup
+          li 
+            a(href="/signin") Signin
+          li 
+            a(href="/cart") Cart
+      else if req.session.userId
+        ul.flex.mobileMenu
+          li 
+            a(href="/products") Products
+          li 
+            a(href="/signout") Signout
+          li 
+            a(href="/cart") Cart
+          li 
+            a(href="/account") Account
+      else if req.session.anonCart || isSignedOut
+        ul.flex.mobileMenu
+          li 
+            a(href="/products") Products
+          li 
+            a(href="/signup") Signup
+          li 
+            a(href="/signin") Signin
+          li 
+            a(href="/cart") Cart
+      else
+        ul.flex.mobileMenu
+          li 
+            a(href="/products") Products
+          li 
+            a(href="/signup") Signup
+          li 
+            a(href="/signin") Signin
+          li 
+            a(href="/cart") Cart
+          
+  
+  nav.nav-middle.flex.desktop
+    div.brand
+      h3
+        a(href="/")
+          i.fas.fa-paw  helenshop
+    div.nav.flex
+      if !req.session
+        ul.flex.menu
+          li 
+            a(href="/products") Products
+          li 
+            a(href="/signup") Signup
+          li 
+            a(href="/signin") Signin
+          li 
+            a(href="/cart") Cart
+      else if req.session.userId
+        ul.flex.menu
+          li 
+            a(href="/products") Products
+          li 
+            a(href="/signout") Signout
+          li 
+            a(href="/cart") Cart
+          li 
+            a(href="/account") Account
+      else if req.session.anonCart || isSignedOut
+        ul.flex.menu
+          li 
+            a(href="/products") Products
+          li 
+            a(href="/signup") Signup
+          li 
+            a(href="/signin") Signin
+          li 
+            a(href="/cart") Cart
+      else
+        ul.flex.menu
+          li 
+            a(href="/products") Products
+          li 
+            a(href="/signup") Signup
+          li 
+            a(href="/signin") Signin
+          li 
+            a(href="/cart") Cart
+
+  nav.nav-bottom.flex
+    div.heading
+      h2 #{sectionTitle}
+    div.alerts
+      if error && error.length > 0
+        div(role="alert").alert.error
+          h3 #{error}
+      if success && success.length > 0
+        div(role="alert").alert.success
+          h3 #{success}

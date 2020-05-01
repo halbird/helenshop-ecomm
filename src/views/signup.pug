@@ -1,0 +1,12 @@
+include head.pug
+- let sectionTitle= "Signup"
+include nav.pug
+
+body
+  form(action="/signup", method="post")
+    input(type="text" name="fname" placeholder="First Name")
+    input(type="text" name="lname" placeholder="Last Name")
+    input(type="email" name="email" placeholder="Email")
+    input(type="password" name="password" placeholder="Password")
+    input(type="password" name="passwordConfirmation" placeholder="Password Confirmation")
+    button(type="submit") Sign Up

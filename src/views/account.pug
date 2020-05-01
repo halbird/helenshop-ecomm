@@ -1,0 +1,15 @@
+include head.pug
+- let sectionTitle= "Account"
+include nav.pug
+
+body
+  h3 This is the information we have on file for you:
+  for result in results
+    div
+      h2 First Name: #{result.fname}
+      h2 Last name: #{result.lname}
+      h2 Email: #{result.email}
+
+  h3 If you would like to change anything, please click the edit button that doesn't exist yet :)
+
+  h3 Here is where you will see products that you ahve posted for sale:

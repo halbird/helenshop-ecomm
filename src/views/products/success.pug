@@ -1,0 +1,12 @@
+include ../head.pug
+- let sectionTitle= "Products"
+include ../nav.pug
+
+body
+  div.flex.added-to-cart
+    h3 You've succesfully added #[span.added-to-cart-title #{results[0].title}] to your cart.
+    ul.flex
+      li 
+        a(href="/products") Continue shopping
+      li 
+        a(href="/cart") View cart
