@@ -36,6 +36,8 @@ const {isLoggedIn} = require("./middlewares/isLoggedIn");
 const {requireFname, requireLname, requireEmail, requirePassword} = require("./utils/validators");
 const app = express();
 
+// const connection = require("../src/utils/dbConfig");
+
 app.set("view engine", "pug");
 app.use("/public", express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -150,6 +152,23 @@ app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   next();
 });
+
+// check product ownership middleware
+function isProductOwner(req, res, next) {
+  if (req.isAuthenticated()) {
+    connection.query(`SELECT * FROM products WHERE id=${req.params.id}`, (err, results) => {
+      if (results[0].created_by === req.session.userId) {
+        productOwner = true;
+      } else {
+        productOwner = false;
+      }
+    })
+  } else {
+    productOwner = false;
+  }
+  next();
+};
+
 
 // dashboard
 app.get("/", (req, res) => {
@@ -338,17 +357,27 @@ app.post("/products/new", (req, res) => {
 });
 
 // show details for one product
-app.get("/products/:id", (req, res) => {
+app.get("/products/:id", isProductOwner, (req, res) => {
   connection.query(`SELECT id, title, price, img, inventory, DATE_FORMAT(created_at, "%M %D %Y") AS created_at FROM products WHERE id=${req.params.id}`, (err, results) => {
     if (err) throw err;
-    res.render("products/details", {results, req});
+    if (results.length != 0) {
+      res.render("products/details", {results, req});
+    } else {
+      req.flash("error", "Couldn't find that product!");
+      res.redirect("/products");
+    }
   });
 });
 
 // show edit form for one product
 app.get("/products/:id/edit", (req, res) => {
   connection.query(`SELECT * FROM products WHERE id=${req.params.id}`, (err, results) => {
-    res.render("products/edit", {req, results});
+    if (results.length != 0) {
+      res.render("products/edit", {req, results});
+    } else {
+      req.flash("error", "Couldn't find that product!");
+      res.redirect("/products");
+    }
   });
 });
 
@@ -360,8 +389,9 @@ app.post("/products/:id/edit", (req, res) => {
 });
 
 // delete a product
-app.post("/products/:id/delete", (req, res) => {
-  res.send("products page");
+app.post("/products/:id/delete", (req, res) => {      // button should be in account list of products
+  connection.query(`DELETE FROM products WHERE id=${req.body.productId}`);
+  res.redirect("/products");      // to account page with list of your products
 });
 
 

@@ -14,7 +14,9 @@ CREATE TABLE products (
   price DECIMAL(8,2) NOT NULL,
   img TEXT,
   inventory INT,
-  created_at TIMESTAMP DEFAULT NOW()
+  created_by INT NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW(),
+  FOREIGN KEY(created_by) REFERENCES users(id)
 );
 
 CREATE TABLE carts (
@@ -24,6 +26,7 @@ CREATE TABLE carts (
   quantity INT NOT NULL,
   created_at TIMESTAMP DEFAULT NOW(),
   FOREIGN KEY(product_id) REFERENCES products(id),
+  FOREIGN KEY(user_id) REFERENCES users(id),
   CONSTRAINT UNIQUE INDEX index_carts_sessions (session_id, product_id),
   CONSTRAINT UNIQUE INDEX index_carts_users (user_id, product_id)
 );
