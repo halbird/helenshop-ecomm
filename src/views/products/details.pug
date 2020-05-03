@@ -18,11 +18,10 @@ body
       h5.i Remaining inventory: #{results[0].inventory}
       h5.a Available as of: #{results[0].created_at}
 
-      if productOwner
+      if results[0].created_by === req.session.userId
         div.flex.product-detail-buttons
           form.product-detail-form(action="/cart/product/add", method="post")
             input(type="hidden", name="productId", value=results[0].id)
-            //- input(type="hidden", name="productOwner", value=results[0].created_by)
             button(type="submit")
               i.fas.fa-shopping-cart  Add to Cart
           button.edit-button
@@ -37,6 +36,5 @@ body
         div.flex.product-detail-buttons
           form.product-detail-form(action="/cart/product/add", method="post")
             input(type="hidden", name="productId", value=results[0].id)
-            //- input(type="hidden", name="productOwner", value=results[0].created_by)
             button(type="submit")
               i.fas.fa-shopping-cart  Add to Cart

@@ -158,15 +158,13 @@ function isProductOwner(req, res, next) {
   if (req.isAuthenticated()) {
     connection.query(`SELECT * FROM products WHERE id=${req.params.id}`, (err, results) => {
       if (results[0].created_by === req.session.userId) {
-        productOwner = true;
-      } else {
-        productOwner = false;
+        next();
       }
     })
   } else {
-    productOwner = false;
-  }
-  next();
+    req.flash("error", "You can only do with products you posted.");
+    res.redirect("/products");
+  };
 };
 
 
@@ -191,9 +189,11 @@ app.get("/", (req, res) => {
   console.log(req.sessionID);
 });
 
+
+// USER
 // signup
 app.get("/signup", (req, res) => {
-  res.render("signup", {req});
+  res.render("users/signup", {req});
 }); 
 
 app.post("/signup", [requireFname, requireLname, requireEmail, requirePassword], (req, res, next) => {
@@ -217,7 +217,7 @@ app.post("/signup", [requireFname, requireLname, requireEmail, requirePassword],
 
 // signin
 app.get("/signin", (req, res) => {
-  res.render("signin", {req});
+  res.render("users/signin", {req});
 });
 
 app.post("/signin", passport.authenticate("local-signin", {
@@ -245,12 +245,37 @@ app.get("/signout", (req, res) => {
 
 // show account info
 app.get("/account", isLoggedIn, (req, res) => {
-  connection.query(`SELECT * FROM users WHERE id=${req.session.userId}`, (err, results) => {
+  connection.query(`SELECT id, fname, lname, email FROM users WHERE id=${req.session.userId}`, (err, results) => {
     if (err) {throw err}
-    res.render("account", {results, req})
+    res.render("users/account", {results, req})
   });
 });
 
+
+app.get("/account/edit", isLoggedIn, (req, res) => {
+  connection.query(`SELECT id, fname, lname, email FROM users WHERE id=${req.session.userId}`, (err, results) => {
+    if (results.length != 0) {
+      res.render("users/edit", {req, results});
+    } else {
+      req.flash("error", "Couldn't find your account.");
+      res.redirect("/");
+    }
+  });
+});
+
+app.post("/account/edit", isLoggedIn, (req, res) => {
+  connection.query(`UPDATE users SET fname="${req.body.fname}", lname="${req.body.lname}", email="${req.body.email}" WHERE id=${req.session.userId}`, (err) => {
+    if (err) {
+      req.flash("error", "Unable to save your changes, email already in use.");
+      return res.redirect("/account");    
+    } else {
+      req.flash("success", "Your account changes have been saved.");
+      res.redirect("/account");
+    }
+  });
+});
+
+// CART
 // show cart
 app.get("/cart", (req, res) => {
   if (req.isAuthenticated()) {
@@ -336,6 +361,8 @@ app.get("/checkout", (req, res) => {
   res.render("products/checkout", {req});
 });
 
+
+// PRODUCTS
 // show products
 app.get("/products", (req, res) => {
   connection.query("SELECT * FROM products", (err, results) => {
@@ -350,15 +377,15 @@ app.get("/products/new", isLoggedIn, (req, res) => {
 });
 
 // submit new product
-app.post("/products/new", (req, res) => {
-  connection.query(`INSERT INTO products (title, price, img, inventory) VALUES ("${req.body.title}", ${parseFloat(req.body.price)}, "${req.body.img}", ${parseInt(req.body.inventory)});`);
+app.post("/products/new", isLoggedIn, (req, res) => {
+  connection.query(`INSERT INTO products (title, price, img, inventory, created_by) VALUES ("${req.body.title}", ${parseFloat(req.body.price)}, "${req.body.img}", ${parseInt(req.body.inventory)}, ${req.session.userId});`);
   req.flash("success", "New product added!");
   res.redirect("/products");
 });
 
 // show details for one product
-app.get("/products/:id", isProductOwner, (req, res) => {
-  connection.query(`SELECT id, title, price, img, inventory, DATE_FORMAT(created_at, "%M %D %Y") AS created_at FROM products WHERE id=${req.params.id}`, (err, results) => {
+app.get("/products/:id", (req, res) => {
+  connection.query(`SELECT id, title, price, img, inventory, created_by, DATE_FORMAT(created_at, "%M %D %Y") AS created_at FROM products WHERE id=${req.params.id}`, (err, results) => {
     if (err) throw err;
     if (results.length != 0) {
       res.render("products/details", {results, req});
@@ -370,7 +397,7 @@ app.get("/products/:id", isProductOwner, (req, res) => {
 });
 
 // show edit form for one product
-app.get("/products/:id/edit", (req, res) => {
+app.get("/products/:id/edit", isProductOwner, (req, res) => {
   connection.query(`SELECT * FROM products WHERE id=${req.params.id}`, (err, results) => {
     if (results.length != 0) {
       res.render("products/edit", {req, results});
@@ -382,17 +409,19 @@ app.get("/products/:id/edit", (req, res) => {
 });
 
 // submit editted product
-app.post("/products/:id/edit", (req, res) => {
+app.post("/products/:id/edit", isProductOwner, (req, res) => {
   connection.query(`UPDATE products SET title="${req.body.title}", price=${parseFloat(req.body.price)}, img="${req.body.img}", inventory=${parseFloat(req.body.inventory)} WHERE id=${req.params.id}`);
   req.flash("success", "Product updated successfully.");
   res.redirect("/products/" + req.params.id);
 });
 
 // delete a product
-app.post("/products/:id/delete", (req, res) => {      // button should be in account list of products
+app.post("/products/:id/delete", isProductOwner, (req, res) => {      // button should be in account list of products
   connection.query(`DELETE FROM products WHERE id=${req.body.productId}`);
   res.redirect("/products");      // to account page with list of your products
 });
+
+
 
 
 // ADD -----------------
@@ -403,9 +432,6 @@ app.post("/products/:id/delete", (req, res) => {      // button should be in acc
   //post /:id/edit
   //post /:id/delete
 
-app.get("/cart/products/delete", (req, res) => {
-  res.send("item removed from cart");
-});
 // add buttons on cart page for checkout cart and delete cart
 
 // ------------------------------------------------

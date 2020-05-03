@@ -20,6 +20,5 @@ body
             h5 Only #{result.inventory} left in stock!
             form(action="/cart/product/add", method="post")
               input(type="hidden", name="productId", value=result.id)
-              //- input(type="hidden", name="productOwner", value=result.created_by)
               button(type="submit") 
                 i.fas.fa-shopping-cart  Add to Cart
