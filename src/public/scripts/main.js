@@ -11,6 +11,8 @@ const menuToggle = document.querySelector(".menuToggle");
 const products = document.querySelector(".products");
 const cover = document.querySelector(".cover");
 
+// const increaseQuantityBtn = document.querySelector()
+
 menuToggle.addEventListener("click", e => {
   e.preventDefault();
   if (mobileMenu.style.display === "block") {
@@ -38,6 +40,11 @@ window.addEventListener("resize", e => {
   body.style.overflow = "auto";
 });
 
+
+
+// reload page with updated quantity and hash location of the product on the page
+  // window.location.hash = "#hash"
+  // this.location.reload();
 }
 
 

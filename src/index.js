@@ -1,9 +1,5 @@
 const dotenv = require("dotenv");
-const result = dotenv.config();
-if (result.error) {
-  throw result.error
-}
-console.log(result.parsed);
+dotenv.config();
 
 const HOST = process.env.HOST;
 const USER = process.env.USER;
@@ -155,18 +151,6 @@ app.use((req, res, next) => {
   next();
 });
 
-
-
-// // middleware to see is user is logged in
-// function isLoggedIn(req, res, next) {
-//   if (req.isAuthenticated()) {
-//     return next();
-//   }
-//   req.flash("error", "You must be signed in to access that.");
-//   res.redirect("/signin");
-// }
-
-
 // dashboard
 app.get("/", (req, res) => {
   if (req.session.anonCart && req.session.userId) {
@@ -174,16 +158,18 @@ app.get("/", (req, res) => {
       if (result.length != 0) {
         connection.query(`DELETE FROM carts WHERE session_id="${req.sessionID}"`);
         req.session.anonCart = false;
-        res.redirect("/cart");
+        req.flash("success", "Here's your cart from last time.");
       } else {
         connection.query(`UPDATE carts SET user_id=${req.session.userId} WHERE session_id="${req.sessionID}"`);
         req.session.anonCart = false;
-        res.redirect("/cart");
+        req.flash("success", "Here's what you have so far.");
       }
+      res.redirect("/cart");
     });
   } else {
     res.render("dashboard", {req});
   }
+  console.log(req.sessionID);
 });
 
 // signup
@@ -229,8 +215,13 @@ app.get("/signout", (req, res) => {
   if (req.session.userId) {
     delete req.session.userId;
   }
-  req.flash("success", "Successfully signed out. Sign back in?");
-  res.redirect("/signin");
+  req.session.regenerate((err) => {
+    if (err) {
+      console.log(err);
+    }
+    req.flash("success", "Successfully signed out. Sign back in?");
+    res.redirect("/signin");
+  })
 });
 
 // show account info
@@ -321,6 +312,11 @@ app.post("/cart/product/delete", (req, res) => {
   res.redirect("/cart");
 });
 
+// checkout cart
+app.get("/checkout", (req, res) => {
+  res.render("products/checkout", {req});
+});
+
 // show products
 app.get("/products", (req, res) => {
   connection.query("SELECT * FROM products", (err, results) => {
@@ -349,21 +345,25 @@ app.get("/products/:id", (req, res) => {
   });
 });
 
+// show edit form for one product
 app.get("/products/:id/edit", (req, res) => {
   connection.query(`SELECT * FROM products WHERE id=${req.params.id}`, (err, results) => {
     res.render("products/edit", {req, results});
   });
 });
 
+// submit editted product
 app.post("/products/:id/edit", (req, res) => {
   connection.query(`UPDATE products SET title="${req.body.title}", price=${parseFloat(req.body.price)}, img="${req.body.img}", inventory=${parseFloat(req.body.inventory)} WHERE id=${req.params.id}`);
   req.flash("success", "Product updated successfully.");
   res.redirect("/products/" + req.params.id);
 });
 
+// delete a product
 app.post("/products/:id/delete", (req, res) => {
   res.send("products page");
 });
+
 
 // ADD -----------------
 
