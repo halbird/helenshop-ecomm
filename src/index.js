@@ -276,16 +276,10 @@ app.post("/account/edit", isLoggedIn, (req, res) => {
 });
 
 app.post("/account/delete", isLoggedIn, (req, res) => {
-  connection.query(`DELETE FROM carts WHERE user_id=${req.session.userId}`, (err) => {
-    if (err) console.log("Could not delete user cart.")
-  });
-  connection.query(`DELETE FROM products WHERE created_by=${req.session.userId}`, (err) => {
-    if (err) console.log("Could not delete user products.")
-  });
   connection.query(`DELETE FROM users WHERE id=${req.session.userId}`, (err) => {
     if (err) console.log("Could not delete the user.")
   });
-  req.flash("success", "You're account has been deleted.");
+  req.flash("success", "Your account has been deleted.");
   res.redirect("/signout");
 });
 
@@ -430,9 +424,9 @@ app.post("/products/:id/edit", isProductOwner, (req, res) => {
 });
 
 // delete a product
-app.post("/products/:id/delete", isProductOwner, (req, res) => {      // button should be in account list of products
+app.post("/products/:id/delete", isProductOwner, (req, res) => {
   connection.query(`DELETE FROM products WHERE id=${req.body.productId}`);
-  res.redirect("/products");      // to account page with list of your products
+  res.redirect("/products");      // to account page with list of your products maybe?
 });
 
 
