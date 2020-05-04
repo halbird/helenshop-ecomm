@@ -11,6 +11,7 @@ const menuToggle = document.querySelector(".menuToggle");
 const products = document.querySelector(".products");
 const cover = document.querySelector(".cover");
 
+const deleteAccountBtn = document.querySelector("#delete-account");
 // const increaseQuantityBtn = document.querySelector()
 
 menuToggle.addEventListener("click", e => {
@@ -40,7 +41,12 @@ window.addEventListener("resize", e => {
   body.style.overflow = "auto";
 });
 
-
+// deleteAccountBtn.addEventListener("click", e => {
+//   e.preventDefault();
+//   if (this.confirm("Are you sure you want to permanently delete your account?")) {
+//     // delete
+//   }
+// });
 
 // reload page with updated quantity and hash location of the product on the page
   // window.location.hash = "#hash"

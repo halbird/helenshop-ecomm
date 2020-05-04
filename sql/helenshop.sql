@@ -30,3 +30,24 @@ CREATE TABLE carts (
   CONSTRAINT UNIQUE INDEX index_carts_sessions (session_id, product_id),
   CONSTRAINT UNIQUE INDEX index_carts_users (user_id, product_id)
 );
+
+
+-- Trigger to keep track of deted accounts
+
+CREATE TABLE deleted_accounts (
+  id INT NOT NULL,
+  fname VARCHAR(100) NOT NULL,
+  lname VARCHAR(100) NOT NULL,
+  email VARCHAR(200) NOT NULL,
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+DELIMITER $$
+
+CREATE TRIGGER capture_deleted_accounts
+  AFTER DELETE ON users FOR EACH ROW
+  BEGIN
+    INSERT INTO deleted_accounts(id, fname, lname, email) VALUES (OLD.id, OLD.fname, OLD.lname, OLD.email);
+  END$$
+
+DELIMITER ;

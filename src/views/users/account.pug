@@ -4,12 +4,18 @@ include ../nav.pug
 
 body
   h3 This is the information we have on file for you:
-  for result in results
-    div
-      h2 First Name: #{result.fname}
-      h2 Last name: #{result.lname}
-      h2 Email: #{result.email}
+  h2 First Name: #{results[0].fname}
+  h2 Last name: #{results[0].lname}
+  h2 Email: #{results[0].email}
 
-  h3 If you would like to change anything, please click the edit button that doesn't exist yet :)
 
-  h3 Here is where you will see products that you ahve posted for sale:
+  div.flex.product-detail-buttons
+    button.edit-button
+      a(href= "/account/edit") 
+        i.fas.fa-edit  Edit
+    form(action="/account/delete", method="post" onsubmit="return confirm('Are you sure you want to permanently delete your account?')")
+      input(type="hidden", name="accountId", value=results[0].id)
+      button#delete-account(type="submit")
+        i.fas.fa-shopping-cart  Delete
+
+h3 Here is where you will see products that you have posted for sale:

@@ -275,6 +275,20 @@ app.post("/account/edit", isLoggedIn, (req, res) => {
   });
 });
 
+app.post("/account/delete", isLoggedIn, (req, res) => {
+  connection.query(`DELETE FROM carts WHERE user_id=${req.session.userId}`, (err) => {
+    if (err) console.log("Could not delete user cart.")
+  });
+  connection.query(`DELETE FROM products WHERE created_by=${req.session.userId}`, (err) => {
+    if (err) console.log("Could not delete user products.")
+  });
+  connection.query(`DELETE FROM users WHERE id=${req.session.userId}`, (err) => {
+    if (err) console.log("Could not delete the user.")
+  });
+  req.flash("success", "You're account has been deleted.");
+  res.redirect("/signout");
+});
+
 // CART
 // show cart
 app.get("/cart", (req, res) => {
@@ -426,10 +440,7 @@ app.post("/products/:id/delete", isProductOwner, (req, res) => {      // button 
 
 // ADD -----------------
 
-// app.post("/account", isLoggedIn, ** edit the info on file)
-  //get /:id        (view and edit user info)
-  //get /:id/edit
-  //post /:id/edit
+// account
   //post /:id/delete
 
 // add buttons on cart page for checkout cart and delete cart
