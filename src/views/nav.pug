@@ -3,14 +3,14 @@ header
   nav.nav-top.flex
     div.contact.flex
       ul.flex
-        li 
+        li#contact-email
           a(href="")
-            span
-              i.far.fa-envelope  anemail@email.com
-        li 
+            i.far.fa-envelope
+              span.next-to-icon  anemail@email.com
+        li#contact-phone
           a(href="")
             i.fas.fa-phone
-              span#phoneNum  888-888-8888
+              span.next-to-icon#phoneNum  888-888-8888
     div.social.flex
       ul.flex
         li 
@@ -39,7 +39,8 @@ header
     div.brand
       h3
         a(href="/")
-          i.fas.fa-paw  helenshop
+          i.fas.fa-paw
+            span#brand-image.next-to-icon  helenshop
     div.mobileNav.flex.closed
       a(href="").menuToggle
         i.fa.fa-bars
@@ -134,7 +135,7 @@ header
 
   nav.nav-bottom.flex
     div.heading
-      h2 #{sectionTitle}
+      h2#section-title #{sectionTitle}
     div.alerts
       if error && error.length > 0
         div(role="alert").alert.error

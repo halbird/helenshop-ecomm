@@ -186,7 +186,7 @@ app.get("/", (req, res) => {
   } else {
     res.render("dashboard", {req});
   }
-  console.log(req.sessionID);
+  console.log("sessionID: ", req.sessionID);
 });
 
 
@@ -245,10 +245,14 @@ app.get("/signout", (req, res) => {
 
 // show account info
 app.get("/account", isLoggedIn, (req, res) => {
-  connection.query(`SELECT id, fname, lname, email FROM users WHERE id=${req.session.userId}`, (err, results) => {
-    if (err) {throw err}
-    res.render("users/account", {results, req})
+  connection.query(`SELECT users.id AS user_id, fname, lname, email, products.id AS product_id, title, price, img, inventory FROM products JOIN users ON products.created_by = users.id`, (err, results) => {
+    if (err) console.log("error", err);
+    res.render("users/account", {req, results});
   });
+  // connection.query(`SELECT id, fname, lname, email FROM users WHERE id=${req.session.userId}`, (err, results) => {
+  //   if (err) {throw err}
+  //   res.render("users/account", {results, req})
+  // });
 });
 
 
@@ -303,7 +307,7 @@ app.get("/cart", (req, res) => {
 
 // add 1 quantity of product to cart from products page
 app.post("/cart/product/add", (req, res) => {
-  connection.query(`SELECT inventory FROM products WHERE id=${req.body.productId};`, (err, results) => {
+  connection.query(`SELECT title, inventory FROM products WHERE id=${req.body.productId};`, (err, results) => {
     if (results[0].inventory > 0) {
       if (req.isAuthenticated()) {
         connection.query(`INSERT INTO carts (user_id, session_id, product_id, quantity) VALUES (${req.session.userId}, "${req.sessionID}", ${req.body.productId}, 1) ON DUPLICATE KEY UPDATE quantity=quantity+1, user_id=${req.session.userId};`);
@@ -313,7 +317,9 @@ app.post("/cart/product/add", (req, res) => {
       }
       connection.query(`UPDATE products SET inventory=inventory-1 WHERE id=${req.body.productId};`);
       connection.query(`SELECT id, title FROM products WHERE id=${req.body.productId}`, (err, results) => {
-        res.render("products/success", {req, results});
+        req.flash("success", `Successfully added ${results[0].title} to your cart!`);
+        res.redirect("back");
+        // res.render("products/success", {req, results});
       });
     } else {
       req.flash("error", "Unable to add to cart due to insufficient inventory.");
@@ -430,34 +436,6 @@ app.post("/products/:id/delete", isProductOwner, (req, res) => {
 });
 
 
-
-
-// ADD -----------------
-
-// account
-  //post /:id/delete
-
-// add buttons on cart page for checkout cart and delete cart
-
-// ------------------------------------------------
-
-
-
 app.listen(3000, () => {
   console.log("listening on port 3000");
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-// to cleanly close the session store:
-// sessionStore.close();
