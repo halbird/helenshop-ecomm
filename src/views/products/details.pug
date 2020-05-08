@@ -12,16 +12,16 @@ body
       div.flex-dir-col.hori-col-center.max-50-600
         img.single-img(src=results[0].img, alt="Product image")
 
-      div.product-detail-description.full-width.flex-dir-col.hori-col-center.half-width-600.col-start-600
+      div.full-width.flex-dir-col.hori-col-center.half-width-600.col-start-600
         h3.medium-font.tb-medium-margin.lb-small-margin-600 #{results[0].title}
         h5.small-font.not-bold.small-margin Price: $#{(results[0].price).toFixed(2)}
-        h5.s.small-font.not-bold.small-margin Seller: (name goes here)
-        h5.i.small-font.not-bold.small-margin Remaining inventory: #{results[0].inventory}
-        h5.a.small-font.not-bold.small-margin Available as of: #{results[0].created_at}
+        h5.small-font.not-bold.small-margin Seller: (name goes here)
+        h5.small-font.not-bold.small-margin Remaining inventory: #{results[0].inventory}
+        h5.small-font.not-bold.small-margin Available as of: #{results[0].created_at}
 
         if results[0].created_by === req.session.userId
           div.flex-dir-row.full-width.hori-row-center.row-start-600
-            button.edit-button.small-margin
+            button.small-margin
               a(href= "/products/" + results[0].id + "/edit") 
                 i.fas.fa-edit  Edit product
             form.small-margin(action="/products/" + results[0].id +"/delete", method="post" onsubmit="return confirm('Are you sure you want to permanently delete this product?')")
@@ -35,34 +35,3 @@ body
               input(type="hidden", name="productId", value=results[0].id)
               button(type="submit")
                 i.fas.fa-shopping-cart  Add to Cart
-//- body
-//-   div.flex.product-details.full-width.flex-dir-col.hori-col-center.shadow-outline
-    
-//-     div.flex.product-detail-img
-//-       button.back-to-products
-//-         a(href= "/products") 
-//-           i.fas.fa-long-arrow-alt-left  Back to products
-//-       img.single-img(src=results[0].img, alt="Product image")
-//-     div.flex.product-detail-description
-//-       h3 #{results[0].title}
-//-       h5 Price: $#{(results[0].price).toFixed(2)}
-//-       h5.s Seller: (name goes here)
-//-       h5.i Remaining inventory: #{results[0].inventory}
-//-       h5.a Available as of: #{results[0].created_at}
-
-//-       if results[0].created_by === req.session.userId
-//-         div.flex.product-detail-buttons
-//-           button.edit-button
-//-             a(href= "/products/" + results[0].id + "/edit") 
-//-               i.fas.fa-edit  Edit product
-//-           form(action="/products/" + results[0].id +"/delete", method="post" onsubmit="return confirm('Are you sure you want to permanently delete this product?')")
-//-             input(type="hidden", name="productId", value=results[0].id)
-//-             button(type="submit")
-//-               i.fas.fa-trash-alt  Delete
-
-//-       else 
-//-         div.flex.product-detail-buttons
-//-           form.product-detail-form(action="/cart/product/add", method="post")
-//-             input(type="hidden", name="productId", value=results[0].id)
-//-             button(type="submit")
-//-               i.fas.fa-shopping-cart  Add to Cart

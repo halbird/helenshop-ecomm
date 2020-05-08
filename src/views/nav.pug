@@ -1,8 +1,8 @@
 div.cover
 header
-  nav.nav-top.flex
-    div.contact.flex
-      ul.flex
+  nav.margin-top-2.flex-dir-row.flow.no-flow-600
+    div.full-width.flex-dir-row.hori-row-center.small-medium-font.half-width-420.start-420.small-font-420.width-65-600
+      ul.flex-dir-row.hori-row-center.flow.full-width.start-420.medium-font-800
         li#contact-email
           a(href="")
             i.far.fa-envelope
@@ -11,8 +11,8 @@ header
           a(href="")
             i.fas.fa-phone
               span.next-to-icon#phoneNum  888-888-8888
-    div.social.flex
-      ul.flex
+    div.full-width.flex-dir-row.hori-row-center.medium-font.half-width-420.end-420.medium-font-420
+      ul.flex-dir-row.flow.full-width.hori-row-center.lr-medium-padding.end-420.no-padding-600
         li 
           a(href="https://www.facebook.com")
             i.fab.fa-facebook
@@ -35,27 +35,27 @@ header
           a(href="https://github.com/halbird")
             i.fab.fa-github
 
-  nav.nav-middle.flex.mobile
-    div.brand
-      h3
+  nav.nav-middle.mobile.flex-dir-row
+    div.width-70
+      h3.no-margin.large-font
         a(href="/")
           i.fas.fa-paw
             span#brand-image.next-to-icon  helenshop
     div.mobileNav.flex.closed
-      a(href="").menuToggle
+      a.menuToggle
         i.fa.fa-bars
       if !req.session
-        ul.flex.mobileMenu
+        ul.mobileMenu
           li 
-            a(href="/products") Products
+            a.lr-padding-20(href="/products") Products
           li 
-            a(href="/signup") Signup
+            a.lr-padding-20(href="/signup") Signup
           li 
-            a(href="/signin") Signin
+            a.lr-padding-20(href="/signin") Signin
           li 
-            a(href="/cart") Cart
+            a.lr-padding-20(href="/cart") Cart
       else if req.session.userId
-        ul.flex.mobileMenu
+        ul.mobileMenu
           li 
             a(href="/products") Products
           li 
@@ -65,7 +65,7 @@ header
           li 
             a(href="/account") Account
       else if req.session.anonCart || isSignedOut
-        ul.flex.mobileMenu
+        ul.mobileMenu
           li 
             a(href="/products") Products
           li 
@@ -75,7 +75,7 @@ header
           li 
             a(href="/cart") Cart
       else
-        ul.flex.mobileMenu
+        ul.mobileMenu
           li 
             a(href="/products") Products
           li 
@@ -86,14 +86,14 @@ header
             a(href="/cart") Cart
           
   
-  nav.nav-middle.flex.desktop
-    div.brand
-      h3
+  nav.nav-middle.desktop.flex-dir-row
+    div.half-width
+      h3.no-margin.large-font
         a(href="/")
           i.fas.fa-paw  helenshop
-    div.nav.flex
+    div.flex-dir-row.row-end.half-width
       if !req.session
-        ul.flex.menu
+        ul.flex-dir-row.menu.row-end.medium-font-600
           li 
             a(href="/products") Products
           li 
@@ -103,39 +103,39 @@ header
           li 
             a(href="/cart") Cart
       else if req.session.userId
-        ul.flex.menu
+        ul.flex-dir-row.row-end.medium-font-600
           li 
-            a(href="/products") Products
+            a.small-padding(href="/products") Products
           li 
-            a(href="/signout") Signout
+            a.small-padding(href="/signout") Signout
           li 
-            a(href="/cart") Cart
+            a.small-padding(href="/cart") Cart
           li 
-            a(href="/account") Account
+            a.small-padding(href="/account") Account
       else if req.session.anonCart || isSignedOut
-        ul.flex.menu
+        ul.flex-dir-row.menu.row-end.medium-font-600
           li 
-            a(href="/products") Products
+            a.small-padding(href="/products") Products
           li 
-            a(href="/signup") Signup
+            a.small-padding(href="/signup") Signup
           li 
-            a(href="/signin") Signin
+            a.small-padding(href="/signin") Signin
           li 
-            a(href="/cart") Cart
+            a.small-padding(href="/cart") Cart
       else
-        ul.flex.menu
+        ul.flex-dir-row.menu.row-end.medium-font-600
           li 
-            a(href="/products") Products
+            a.small-padding(href="/products") Products
           li 
-            a(href="/signup") Signup
+            a.small-padding(href="/signup") Signup
           li 
-            a(href="/signin") Signin
+            a.small-padding(href="/signin") Signin
           li 
-            a(href="/cart") Cart
+            a.small-padding(href="/cart") Cart
 
-  nav.nav-bottom.flex
-    div.heading
-      h2#section-title #{sectionTitle}
+  nav.flex-dir-row
+    div.text-center.full-width.medium-font.width-40-600.text-left-600
+      h2#section-title.small-margin #{sectionTitle}
     div.alerts
       if error && error.length > 0
         div(role="alert").alert.error
