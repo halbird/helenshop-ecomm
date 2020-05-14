@@ -183,6 +183,10 @@ app.get("/", (req, res) => {
       }
       res.redirect("/cart");
     });
+  } else if (req.session.userId) {
+    connection.query(`SELECT id, fname, lname FROM users WHERE id=${req.session.userId}`, (err, results) => {
+      res.render("dashboard", {req, results});
+    });
   } else {
     res.render("dashboard", {req});
   }
@@ -224,7 +228,6 @@ app.post("/signin", passport.authenticate("local-signin", {
   successRedirect: "/",
   failureRedirect: "/signin",
   failureFlash: true,
-  successFlash: "Welcome!"
 }), (req, res) => {
 });
 

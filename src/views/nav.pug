@@ -105,37 +105,37 @@ header
       else if req.session.userId
         ul.flex-dir-row.row-end.medium-font-600
           li 
-            a.small-padding(href="/products") Products
+            a.smaller-padding(href="/products") Products
           li 
-            a.small-padding(href="/signout") Signout
+            a.smaller-padding(href="/signout") Signout
           li 
-            a.small-padding(href="/cart") Cart
+            a.smaller-padding(href="/cart") Cart
           li 
-            a.small-padding(href="/account") Account
+            a.smaller-padding(href="/account") Account
       else if req.session.anonCart || isSignedOut
         ul.flex-dir-row.menu.row-end.medium-font-600
           li 
-            a.small-padding(href="/products") Products
+            a.smaller-padding(href="/products") Products
           li 
-            a.small-padding(href="/signup") Signup
+            a.smaller-padding(href="/signup") Signup
           li 
-            a.small-padding(href="/signin") Signin
+            a.smaller-padding(href="/signin") Signin
           li 
-            a.small-padding(href="/cart") Cart
+            a.smaller-padding(href="/cart") Cart
       else
         ul.flex-dir-row.menu.row-end.medium-font-600
           li 
-            a.small-padding(href="/products") Products
+            a.smaller-padding(href="/products") Products
           li 
-            a.small-padding(href="/signup") Signup
+            a.smaller-padding(href="/signup") Signup
           li 
-            a.small-padding(href="/signin") Signin
+            a.smaller-padding(href="/signin") Signin
           li 
-            a.small-padding(href="/cart") Cart
+            a.smaller-padding(href="/cart") Cart
 
-  nav.flex-dir-row
+  nav.flex-dir-col
     div.text-center.full-width.medium-font.width-40-600.text-left-600
-      h2#section-title.small-margin #{sectionTitle}
+      h2#section-title.small-margin.text-center #{sectionTitle}
     div.alerts
       if error && error.length > 0
         div(role="alert").alert.error

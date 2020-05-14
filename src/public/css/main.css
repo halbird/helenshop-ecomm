@@ -70,10 +70,10 @@ button {
 .vert-row-center {
   align-items: center;
 }
-.vert-col-center {
+.hori-row-center {
   justify-content: center;
 }
-.hori-row-center {
+.vert-col-center {
   justify-content: center;
 }
 .hori-col-center {
@@ -85,6 +85,9 @@ button {
 .row-end {
   justify-content: flex-end;
 }
+.col-start-self {
+  align-self: flex-start;
+}
 /* WIDTH */
 .full-width {
   width: 100%;
@@ -95,10 +98,17 @@ button {
 .width-70 {
   width: 70%;
 }
+.width-25 {
+  width: 25%;
+}
+.width-90 {
+  width: 90%;
+}
 .max-500 {
   max-width: 500px;
 }
-/* IMAGES */
+
+/* IMAGES AND SHAPES */
 .thumbnail {
   width: 100px;
   height: 100px;
@@ -115,6 +125,33 @@ button {
   border-radius: 5%;
   max-width: 75%;
 }
+.rect-block-medium {
+  width: 300px;
+  height: 120px;
+  border-radius: 7%;
+}
+.rect-block-small {
+  width: 132px;
+  height: 120px;
+  border-radius: 7%;
+}
+.btn {
+  font-size: 16px;
+  border: 1px solid transparent;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.btn-submit {
+  width: 125px;
+  color: purple;
+  background-color: transparent;
+  border-color: purple;
+}
+.btn-submit:hover {
+  color: #ffffff;
+  background-color: purple;
+  border-color: purple;
+}
+
 /* APPEARANCE */
 .shadow-outline {
   box-shadow: 0px 0px 1px 0px rgba(0,0,0,0.25);
@@ -125,6 +162,12 @@ button {
 .not-bold {
   font-weight: 400;
 }
+.point-cursor {
+  cursor: pointer;
+}
+.purple-border {
+  border: 1px solid purple;
+}
 /* MARGIN */
 .small-margin {
   margin: 10px;
@@ -132,8 +175,14 @@ button {
 .tb-small-margin {
   margin: 10px 0;
 }
+.t-small-margin {
+  margin-top: 10px;
+}
 .medium-margin {
   margin: 20px;
+}
+.t-margin-medium {
+  margin: 15px 0 0 0;
 }
 .tb-medium-margin {
   margin: 20px 0;
@@ -147,9 +196,15 @@ button {
 .margin-top-2 {
   margin-top: 2%;
 }
+.margin-left-14 {
+  margin-left: 14%;
+}
 /* PADDING */
 .small-padding {
   padding: 10px;
+}
+.smaller-padding {
+  padding: 7px;
 }
 .medium-padding {
   padding: 20px;
@@ -181,6 +236,9 @@ button {
 }
 .large-font {
   font-size: 32px;
+}
+.bold {
+  font-weight: bold;
 }
 
 /* VERY SPECIFIC CSS FOR NAV */
@@ -290,6 +348,9 @@ button {
   .grow-third-600 {
     flex: 1 29%;
   }
+  .grow-half-600 {
+    flex: 1 46%;
+  }
   .no-flow-600 {
     flex-wrap: nowrap;
   }
@@ -320,6 +381,20 @@ button {
     height: 120px;
     object-fit: cover;
     border-radius: 7%;
+  }
+  .rect-block-600 {
+    width: 230px;
+    height: 120px;
+    border-radius: 7%;
+  }
+  .rect-block-small-600 {
+    width: 320px;
+    height: 120px;
+    border-radius: 7%;
+  }
+  .rect-container-600 {
+    width: 535px;
+    padding: 0;
   }
   /* MARGIN */
   .no-margin-600 {
