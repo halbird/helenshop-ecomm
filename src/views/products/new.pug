@@ -1,14 +1,20 @@
 include ../head.pug
-- let sectionTitle= "Products"
+- let sectionTitle= "New Product"
 include ../nav.pug
 
 body
-  form(action="/products/new", method="post")
-    input(type="text" name="title" placeholder="Product Title")
-    input(type="number" step="0.01" min="0" max="999999.99" name="price" placeholder="Price")
-    input(type="text" name="img" placeholder="Image")
-    input(type="number" min="0" max="10000" name="inventory" placeholder="Inventory")
-    button(type="submit") Submit
+  div.flex-dir-col.hori-col-center
+    form.flex-dir-col.hori-col-center.small-margin.max-500.width-90.shadow-outline.medium-padding.white-background(action="/products/new", method="post")
+      label.col-start-self.margin-left-14.t-small-margin.bold(for="title") Product Title
+      input.width-70.smaller-padding.small-margin.small-font.purple-border(type="text" name="title")
+      label.col-start-self.margin-left-14.t-small-margin.bold(for="price") Price
+      input.width-70.smaller-padding.small-margin.small-font.purple-border(type="number" step="0.01" min="0" max="999999.99" name="price" placeholder="$")
+      label.col-start-self.margin-left-14.t-small-margin.bold(for="img") Image URL
+      input.width-70.smaller-padding.small-margin.small-font.purple-border(type="text" name="img")
+      label.col-start-self.margin-left-14.t-small-margin.bold(for="inventory") Inventory
+      input.width-70.smaller-padding.small-margin.small-font.purple-border(type="number" min="0" max="10000" name="inventory")
+      .flex-dir-row.hori-row-center.vert-row-center.width-70
+        button.tb-med-lr-small-margin.btn.btn-submit.medium-btn.bold(type="submit") Submit
+        a.a-btn.btn-edit.a-medium-btn.tb-med-lr-small-margin.bold(href= "/products") Cancel
 
-
-//- get the product_id from the newly added row in the sql table
+include ../footer.pug

@@ -4,42 +4,42 @@ include ../nav.pug
 
 body
   .full-width.flex.flow
-    .flex-dir-col.full-width.small-padding.tb-small-margin.left-padding-10.shadow-outline
+    .flex-dir-col.full-width.small-padding.small-margin.left-padding-10.shadow-outline.white-background
       h3.small-margin Your information on file:
       h4.small-margin First Name: #{results[0].fname}
       h4.small-margin Last name: #{results[0].lname}
       h4.small-margin Email: #{results[0].email}
 
-      div.flex-dir-row
-        button.small-margin
-          a(href="/account/edit") 
-            i.fas.fa-edit  Edit
+      div.left-padding-2.flex-dir-row.vert-row-center
+        a.a-btn.btn-edit.a-small-btn(href="/account/edit") 
+          i.fas.fa-edit  Edit
         form(action="/account/delete", method="post" onsubmit="return confirm('Are you sure you want to permanently delete your account?')")
           input(type="hidden", name="accountId", value=results[0].user_id)
-          button.small-margin#delete-account(type="submit")
+          button.small-margin.btn.btn-delete.small-btn#delete-account(type="submit")
             i.fas.fa-trash-alt  Delete
 
     .flex-dir-row.full-width.hori-col-center.flow
       h3.full-width.medium-margin.medium-font.text-center Your Products
       .flex-dir-row.full-width.hori-row-center.small-margin
-        button
-          a(href= "/products/new") 
-            i.fas.fa-plus.next-to-icon  List a new product
+        a.a-btn.btn-submit.a-x-large-btn.white-background(href= "/products/new") 
+          i.fas.fa-plus.next-to-icon  List a new product
       for result in results
-        div.flex-dir-col.flow.hori-row-center.shadow-outline.small-margin.grow
+        div.flex-dir-col.flow.hori-row-center.shadow-outline.small-margin.grow.small-padding.white-background
           .flex-dir-col.full-width.hori-col-center
             img.small-margin.thumbnail.thumbnail-600(src=result.img, alt="Product Thumbnail")
           .flex-dir-col
             .flex-dir-row.flow.hori-row-center
-              h4.small-margin #{result.title}
+              h4.small-margin
+                a(href="/products/" + result.product_id) #{result.title}
             .flex-dir-row.hori-row-center
               h4.small-margin $#{result.price.toFixed(2)}
               h4.small-margin #{result.inventory} in stock
-            .flex-dir-row.hori-row-center
-              button.small-margin
-                a(href="/products/" + result.product_id + "/edit") 
-                  i.fas.fa-edit  Edit
-              form.small-margin(action="/products/" + result.product_id +"/delete", method="post" onsubmit="return confirm('Are you sure you want to permanently delete this product?')")
+            .flex-dir-row.hori-row-center.vert-row-center
+              a.a-btn.btn-edit.a-x-small-btn.tb-med-lr-small-margin(href="/products/" + result.product_id + "/edit") 
+                i.fas.fa-edit  Edit
+              form(action="/products/" + result.product_id +"/delete", method="post" onsubmit="return confirm('Are you sure you want to permanently delete this product?')")
                 input(type="hidden", name="productId", value=result.product_id)
-                button(type="submit")
+                button.tb-med-lr-small-margin.btn.btn-delete.x-small-btn(type="submit")
                   i.fas.fa-trash-alt  Delete
+
+include ../footer.pug

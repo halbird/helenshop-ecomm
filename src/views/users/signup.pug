@@ -4,7 +4,7 @@ include ../nav.pug
 
 body
   div.flex-dir-col.hori-col-center
-    form.flex-dir-col.hori-col-center.small-margin.max-500.width-90.shadow-outline.medium-padding(action="/signup", method="post")
+    form.flex-dir-col.hori-col-center.small-margin.max-500.width-90.shadow-outline.medium-padding.white-background(action="/signup", method="post")
       label.col-start-self.margin-left-14.t-small-margin.bold(for="fname") First Name
       input.width-70.smaller-padding.small-margin.small-font.purple-border(type="text" name="fname")
       label.col-start-self.margin-left-14.t-small-margin.bold(for="lname") Last Name
@@ -15,4 +15,6 @@ body
       input.width-70.smaller-padding.small-margin.small-font.purple-border(type="password" name="password" placeholder="Minimum 7 characters")
       label.col-start-self.margin-left-14.t-small-margin.bold(for="passwordConfirmation") Password Confirmation
       input.width-70.smaller-padding.small-margin.small-font.purple-border(type="password" name="passwordConfirmation")
-      button.width-25.smaller-padding.small-margin.btn.btn-submit.point-cursor(type="submit") Sign Up
+      button.width-25.smaller-padding.small-margin.btn.btn-submit.medium-btn.bold(type="submit") Sign Up
+
+include ../footer.pug

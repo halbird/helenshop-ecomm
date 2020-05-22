@@ -1,145 +1,146 @@
 div.cover
-header
-  nav.margin-top-2.flex-dir-row.flow.no-flow-600
-    div.full-width.flex-dir-row.hori-row-center.small-medium-font.half-width-420.start-420.small-font-420.width-65-600
-      ul.flex-dir-row.hori-row-center.flow.full-width.start-420.medium-font-800
-        li#contact-email
-          a(href="")
-            i.far.fa-envelope
-              span.next-to-icon  anemail@email.com
-        li#contact-phone
-          a(href="")
-            i.fas.fa-phone
-              span.next-to-icon#phoneNum  888-888-8888
-    div.full-width.flex-dir-row.hori-row-center.medium-font.half-width-420.end-420.medium-font-420
-      ul.flex-dir-row.flow.full-width.hori-row-center.lr-medium-padding.end-420.no-padding-600
-        li 
-          a(href="https://www.facebook.com")
-            i.fab.fa-facebook
-        li 
-          a(href="https://twitter.com")
-            i.fab.fa-twitter
-        li 
-          a(href="https://www.snapchat.com")
-            i.fab.fa-snapchat-ghost
-        li 
-          a(href="https://www.pinterest.com")
-            i.fab.fa-pinterest
-        li 
-          a(href="https://www.instagram.com")
-            i.fab.fa-instagram
-        li 
-          a(href="https://www.yelp.com")
-            i.fab.fa-yelp
-        li 
-          a(href="https://github.com/halbird")
-            i.fab.fa-github
+body
+  header
+    nav.margin-top-2.flex-dir-row.flow.no-flow-600
+      div.full-width.flex-dir-row.hori-row-center.small-medium-font.half-width-420.start-420.small-font-420.width-65-600
+        ul.flex-dir-row.hori-row-center.flow.full-width.start-420.medium-font-800
+          li#contact-email
+            a(href="")
+              i.far.fa-envelope
+                span.next-to-icon  anemail@email.com
+          li#contact-phone
+            a(href="")
+              i.fas.fa-phone
+                span.next-to-icon#phoneNum  888-888-8888
+      div.full-width.flex-dir-row.hori-row-center.medium-font.half-width-420.end-420.medium-font-420
+        ul.flex-dir-row.flow.full-width.hori-row-center.lr-medium-padding.end-420.no-padding-600
+          li 
+            a(href="https://www.facebook.com")
+              i.fab.fa-facebook
+          li 
+            a(href="https://twitter.com")
+              i.fab.fa-twitter
+          li 
+            a(href="https://www.snapchat.com")
+              i.fab.fa-snapchat-ghost
+          li 
+            a(href="https://www.pinterest.com")
+              i.fab.fa-pinterest
+          li 
+            a(href="https://www.instagram.com")
+              i.fab.fa-instagram
+          li 
+            a(href="https://www.yelp.com")
+              i.fab.fa-yelp
+          li 
+            a(href="https://github.com/halbird")
+              i.fab.fa-github
 
-  nav.nav-middle.mobile.flex-dir-row
-    div.width-70
-      h3.no-margin.large-font
-        a(href="/")
-          i.fas.fa-paw
-            span#brand-image.next-to-icon  helenshop
-    div.mobileNav.flex.closed
-      a.menuToggle
-        i.fa.fa-bars
-      if !req.session
-        ul.mobileMenu
-          li 
-            a.lr-padding-20(href="/products") Products
-          li 
-            a.lr-padding-20(href="/signup") Signup
-          li 
-            a.lr-padding-20(href="/signin") Signin
-          li 
-            a.lr-padding-20(href="/cart") Cart
-      else if req.session.userId
-        ul.mobileMenu
-          li 
-            a(href="/products") Products
-          li 
-            a(href="/signout") Signout
-          li 
-            a(href="/cart") Cart
-          li 
-            a(href="/account") Account
-      else if req.session.anonCart || isSignedOut
-        ul.mobileMenu
-          li 
-            a(href="/products") Products
-          li 
-            a(href="/signup") Signup
-          li 
-            a(href="/signin") Signin
-          li 
-            a(href="/cart") Cart
-      else
-        ul.mobileMenu
-          li 
-            a(href="/products") Products
-          li 
-            a(href="/signup") Signup
-          li 
-            a(href="/signin") Signin
-          li 
-            a(href="/cart") Cart
-          
-  
-  nav.nav-middle.desktop.flex-dir-row
-    div.half-width
-      h3.no-margin.large-font
-        a(href="/")
-          i.fas.fa-paw  helenshop
-    div.flex-dir-row.row-end.half-width
-      if !req.session
-        ul.flex-dir-row.menu.row-end.medium-font-600
-          li 
-            a(href="/products") Products
-          li 
-            a(href="/signup") Signup
-          li 
-            a(href="/signin") Signin
-          li 
-            a(href="/cart") Cart
-      else if req.session.userId
-        ul.flex-dir-row.row-end.medium-font-600
-          li 
-            a.smaller-padding(href="/products") Products
-          li 
-            a.smaller-padding(href="/signout") Signout
-          li 
-            a.smaller-padding(href="/cart") Cart
-          li 
-            a.smaller-padding(href="/account") Account
-      else if req.session.anonCart || isSignedOut
-        ul.flex-dir-row.menu.row-end.medium-font-600
-          li 
-            a.smaller-padding(href="/products") Products
-          li 
-            a.smaller-padding(href="/signup") Signup
-          li 
-            a.smaller-padding(href="/signin") Signin
-          li 
-            a.smaller-padding(href="/cart") Cart
-      else
-        ul.flex-dir-row.menu.row-end.medium-font-600
-          li 
-            a.smaller-padding(href="/products") Products
-          li 
-            a.smaller-padding(href="/signup") Signup
-          li 
-            a.smaller-padding(href="/signin") Signin
-          li 
-            a.smaller-padding(href="/cart") Cart
+    nav.nav-middle.mobile.flex-dir-row
+      div.width-70
+        h3.no-margin.large-font
+          a#brand-image(href="/")
+            i.fas.fa-paw
+              span.next-to-icon  helenshop
+      div.mobileNav.flex.closed
+        a.point-cursor.menuToggle
+          i.fa.fa-bars
+        if !req.session
+          ul.mobileMenu
+            li 
+              a.lr-padding-20(href="/products") Products
+            li 
+              a.lr-padding-20(href="/signup") Signup
+            li 
+              a.lr-padding-20(href="/signin") Signin
+            li 
+              a.lr-padding-20(href="/cart") Cart
+        else if req.session.userId
+          ul.mobileMenu
+            li 
+              a(href="/products") Products
+            li 
+              a(href="/signout") Signout
+            li 
+              a(href="/cart") Cart
+            li 
+              a(href="/account") Account
+        else if req.session.anonCart || isSignedOut
+          ul.mobileMenu
+            li 
+              a(href="/products") Products
+            li 
+              a(href="/signup") Signup
+            li 
+              a(href="/signin") Signin
+            li 
+              a(href="/cart") Cart
+        else
+          ul.mobileMenu
+            li 
+              a(href="/products") Products
+            li 
+              a(href="/signup") Signup
+            li 
+              a(href="/signin") Signin
+            li 
+              a(href="/cart") Cart
+            
+    
+    nav.nav-middle.desktop.flex-dir-row
+      div.half-width
+        h3.no-margin.large-font
+          a#brand-image-desk(href="/")
+            i.fas.fa-paw  helenshop
+      div.flex-dir-row.row-end.half-width
+        if !req.session
+          ul.flex-dir-row.menu.row-end.medium-font-600
+            li 
+              a.smaller-padding.btn-transparent(href="/products") Products
+            li 
+              a.smaller-padding.btn-transparent(href="/signup") Signup
+            li 
+              a.smaller-padding.btn-transparent(href="/signin") Signin
+            li 
+              a.smaller-padding.btn-transparent(href="/cart") Cart
+        else if req.session.userId
+          ul.flex-dir-row.row-end.medium-font-600
+            li 
+              a.smaller-padding.btn-transparent(href="/products") Products
+            li 
+              a.smaller-padding.btn-transparent(href="/signout") Signout
+            li 
+              a.smaller-padding.btn-transparent(href="/cart") Cart
+            li 
+              a.smaller-padding.btn-transparent(href="/account") Account
+        else if req.session.anonCart || isSignedOut
+          ul.flex-dir-row.menu.row-end.medium-font-600
+            li 
+              a.smaller-padding.btn-transparent(href="/products") Products
+            li 
+              a.smaller-padding.btn-transparent(href="/signup") Signup
+            li 
+              a.smaller-padding.btn-transparent(href="/signin") Signin
+            li 
+              a.smaller-padding.btn-transparent(href="/cart") Cart
+        else
+          ul.flex-dir-row.menu.row-end.medium-font-600
+            li 
+              a.smaller-padding.btn-transparent(href="/products") Products
+            li 
+              a.smaller-padding.btn-transparent(href="/signup") Signup
+            li 
+              a.smaller-padding.btn-transparent(href="/signin") Signin
+            li 
+              a.smaller-padding.btn-transparent(href="/cart") Cart
 
-  nav.flex-dir-col
-    div.text-center.full-width.medium-font.width-40-600.text-left-600
-      h2#section-title.small-margin.text-center #{sectionTitle}
-    div.alerts
-      if error && error.length > 0
-        div(role="alert").alert.error
-          h3 #{error}
-      if success && success.length > 0
-        div(role="alert").alert.success
-          h3 #{success}
+    nav.flex-dir-col
+      div.text-center.full-width.medium-font
+        h2#section-title.small-margin.text-center #{sectionTitle}
+      div.alerts
+        if error && error.length > 0
+          div(role="alert").alert.error
+            h3 #{error}
+        if success && success.length > 0
+          div(role="alert").alert.success
+            h3 #{success}

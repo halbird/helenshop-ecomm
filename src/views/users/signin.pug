@@ -4,9 +4,11 @@ include ../nav.pug
 
 body
   div.flex-dir-col.hori-col-center
-    form.flex-dir-col.hori-col-center.small-margin.max-500.width-90.shadow-outline.medium-padding(action="/signin", method="post")
+    form.flex-dir-col.hori-col-center.small-margin.max-500.width-90.shadow-outline.medium-padding.white-background(action="/signin", method="post")
       label.col-start-self.margin-left-14.t-small-margin.bold(for="email") Email
       input.width-70.smaller-padding.small-margin.small-font.purple-border(type="email" name="email")
       label.col-start-self.margin-left-14.t-small-margin.bold(for="password") Password
       input.width-70.smaller-padding.small-margin.small-font.purple-border(type="password" name="password")
-      button.width-25.smaller-padding.small-margin.btn.btn-submit.point-cursor(type="submit") Sign In
+      button.width-25.smaller-padding.small-margin.btn.btn-submit.medium-btn.bold(type="submit") Sign In
+
+include ../footer.pug

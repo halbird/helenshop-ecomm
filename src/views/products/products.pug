@@ -2,35 +2,40 @@ include ../head.pug
 - let sectionTitle= "Products"
 include ../nav.pug
 
-body
-  section.flow.flex-dir-row
+section.flow.flex-dir-row
 
-    div.flex.grow-full.shadow-outline.padding-1.margin-1.grow-third-600.grow-fourth-950.grow-fifth-1500.large-top-padding-600.max-200-600
-      ul.medium-font.text-center.full-width
-        li.medium-padding
-          a(href="/products/new")
-            i.fas.fa-plus
-              span.next-to-icon  List a New Product
+  div.flex.grow-full.thick-shadow.padding-1.margin-1.grow-third-600.grow-fourth-950.grow-fifth-1500.large-top-padding-600.max-200-600.white-background
+    ul.medium-font.text-center.full-width
+      li
+        a.tb-medium-padding.btn-transparent.dark-text(href="/products/new")
+          i.fas.fa-plus
+            span.next-to-icon  List a New Product
+      li.hide-600
+        a.tb-medium-padding.btn-transparent.dark-text(href="/cart")
+          i.fas.fa-shopping-cart
+            span.next-to-icon  View Cart
 
-    for result in results
-      if result.inventory > 0
-        div.flex-dir-col.max-500.grow-full.grow-half-420.grow-third-600.grow-fourth-950.grow-fifth-1500.padding-1.margin-1.shadow-outline
-          div.flex.hori-row-center
-            img.square-img.small-margin(src=result.img, alt="Product image")
-          div.text-center
-            h3
-              a(href="/products/" + result.id) #{result.title}
-            h4 $#{(result.price).toFixed(2)}
-            h5 Only #{result.inventory} left in stock!
-            if result.created_by === req.session.userId
-              button
-                a(href= "/products/" + result.id + "/edit") 
-                  i.fas.fa-edit
-                    span.next-to-icon  Edit
+  for result in results
+    if result.inventory > 0
+      div.flex-dir-col.max-500.grow-full.grow-half-420.grow-third-600.grow-fourth-950.grow-fifth-1500.padding-1.margin-1.thick-shadow.white-background
+        div.flex.hori-row-center
+          img.square-img.small-margin(src=result.img, alt="Product image")
+        div.text-center
+          h3
+            a(href="/products/" + result.id) #{result.title}
+          h4 $#{(result.price).toFixed(2)}
+          h5 Only #{result.inventory} left in stock!
+          if result.created_by === req.session.userId
+            .flex-dir-row.hori-row-center.vert-row-center
+              a.a-btn.btn-edit.a-x-small-btn.tb-med-lr-small-margin(href="/products/" + result.id + "/edit") 
+                i.fas.fa-edit
+                  span.next-to-icon  Edit
 
-            else
-              form(action="/cart/product/add", method="post")
-                input(type="hidden", name="productId", value=result.id)
-                button(type="submit") 
-                  i.fas.fa-shopping-cart
-                    span.next-to-icon  Add to Cart
+          else
+            form(action="/cart/product/add", method="post")
+              input(type="hidden", name="productId", value=result.id)
+              button.small-margin.btn.btn-submit.large-btn(type="submit") 
+                i.fas.fa-shopping-cart
+                  span.next-to-icon  Add to Cart
+
+include ../footer.pug

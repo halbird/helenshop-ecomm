@@ -3,17 +3,23 @@ include ../head.pug
 include ../nav.pug
 
 body
-  form(action="/products/" + results[0].id + "/edit", method="post")
-    label(for="title") Product Title
-    input(type="text" name="title" placeholder="Product Title" value=results[0].title)
-    label(for="title") Product Price
-    input(type="number" step="0.01" min="0" max="999999.99" name="price" placeholder="Price" value=results[0].price)
-    label(for="title") Product Image
-    input(type="text" name="img" placeholder="Image" value=results[0].img)
-    label(for="title") Product Inventory
-    input(type="number" min="0" max="10000" name="inventory" placeholder="Inventory" value=results[0].inventory)
-    button(type="submit") Submit
-  button
-    a(href= "/products/" + results[0].id) Cancel
+  div.flex-dir-col.hori-col-center
+    div.full-width.flex-dir-col.hori-col-center.white-background.shadow-outline.max-500
+      form.flex-dir-col.hori-col-center.small-margin.max-500.width-90.tlr-medium-padding(action="/products/" + results[0].id + "/edit", method="post")
+        label.col-start-self.margin-left-14.t-small-margin.bold(for="title") Product Title
+        input.width-70.smaller-padding.small-margin.small-font.purple-border(type="text" name="title" placeholder="Product Title" value=results[0].title)
+        label.col-start-self.margin-left-14.t-small-margin.bold(for="title") Product Price
+        input.width-70.smaller-padding.small-margin.small-font.purple-border(type="number" step="0.01" min="0" max="999999.99" name="price" placeholder="Price" value=results[0].price)
+        label.col-start-self.margin-left-14.t-small-margin.bold(for="title") Product Image
+        input.width-70.smaller-padding.small-margin.small-font.purple-border(type="text" name="img" placeholder="Image" value=results[0].img)
+        label.col-start-self.margin-left-14.t-small-margin.bold(for="title") Product Inventory
+        input.width-70.smaller-padding.small-margin.small-font.purple-border(type="number" min="0" max="10000" name="inventory" placeholder="Inventory" value=results[0].inventory)
+        .flex-dir-row.hori-row-center.vert-row-center.width-70
+          button.tb-med-lr-small-margin.btn.btn-submit.medium-btn.bold(type="submit") Submit
+          a.a-btn.btn-edit.a-medium-btn.tb-med-lr-small-margin.bold(href= "/account") Cancel
+      form(action="/products/" + results[0].id +"/delete", method="post" onsubmit="return confirm('Are you sure you want to permanently delete this product?')")
+        input(type="hidden", name="productId", value=results[0].id)
+        button.lrb-medium-margin.btn.btn-delete.medium-btn(type="submit")
+          i.fas.fa-trash-alt  Delete
 
-//- pre-fill the form with what is already in the db
+include ../footer.pug

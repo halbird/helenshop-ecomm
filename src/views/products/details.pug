@@ -5,10 +5,10 @@ include ../nav.pug
 
 body
   div
-    button
-      a(href= "/products") 
-        i.fas.fa-long-arrow-alt-left  Back to products
-    div.full-width.flex-dir-col.hori-col-center.shadow-outline.tb-medium-margin.tb-medium-padding.flex-row-600.start-600.hori-row-center-600.vert-row-center.tb-x-lg-padding-600
+    .flex-dir-row.full-width
+      a.a-btn.btn-submit.a-large-btn.white-background(href= "/products") 
+        i.fas.fa-long-arrow-alt-left.next-to-icon  Back to products
+    div.full-width.flex-dir-col.hori-col-center.shadow-outline.tb-medium-margin.tb-medium-padding.flex-row-600.start-600.hori-row-center-600.vert-row-center.tb-x-lg-padding-600.white-background
       div.flex-dir-col.hori-col-center.max-50-600
         img.single-img(src=results[0].img, alt="Product image")
 
@@ -20,18 +20,19 @@ body
         h5.small-font.not-bold.small-margin Available as of: #{results[0].created_at}
 
         if results[0].created_by === req.session.userId
-          div.flex-dir-row.full-width.hori-row-center.row-start-600
-            button.small-margin
-              a(href= "/products/" + results[0].id + "/edit") 
-                i.fas.fa-edit  Edit product
-            form.small-margin(action="/products/" + results[0].id +"/delete", method="post" onsubmit="return confirm('Are you sure you want to permanently delete this product?')")
+          .flex-dir-row.hori-row-center.vert-row-center
+            a.a-btn.btn-edit.a-x-small-btn.tb-med-lr-small-margin(href= "/products/" + results[0].id + "/edit") 
+              i.fas.fa-edit  Edit
+            form(action="/products/" + results[0].id +"/delete", method="post" onsubmit="return confirm('Are you sure you want to permanently delete this product?')")
               input(type="hidden", name="productId", value=results[0].id)
-              button(type="submit")
+              button.tb-med-lr-small-margin.btn.btn-delete.x-small-btn(type="submit")
                 i.fas.fa-trash-alt  Delete
 
         else 
           div.flex-dir-row.full-width.hori-row-center.row-start-600
-            form.small-margin.product-detail-form(action="/cart/product/add", method="post")
+            form(action="/cart/product/add", method="post")
               input(type="hidden", name="productId", value=results[0].id)
-              button(type="submit")
+              button.small-margin.btn.btn-submit.large-btn(type="submit")
                 i.fas.fa-shopping-cart  Add to Cart
+
+include ../footer.pug

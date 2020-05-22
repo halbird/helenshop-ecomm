@@ -4,35 +4,41 @@ include nav.pug
 
 - let cartTotal = 0
 body
-  if !results || results.length === 0
-    div
-      h2 Your cart is empty!
-  else
-    for result in results
-      - cartTotal += (result.price * result.quantity)
+  .flex-dir-col.hori-col-center
+    if !results || results.length === 0
       div
-        h2 #{result.title}
-        ul
-          li #{result.price}
-          li #{result.quantity}
-          li #{result.img}
-      div
-        form(action="/cart/product/increase", method="post")
-          input(type="hidden", name="productId", value=result.product_id)
-          button(type="submit") + 1 to cart
-      if result.quantity > 1
-        div
-          form(action="/cart/product/decrease", method="post")
-            input(type="hidden", name="productId", value=result.product_id)
-            button(type="submit") - 1 from cart
-      else
-        div
-          form(action="/cart/product/delete", method="post")
-            input(type="hidden", name="productId", value=result.product_id)
-            button(type="submit") - 1 from cart
+        h2 Your cart is empty!
+    else
+      for result in results
+        - cartTotal += (result.price * result.quantity)
+        .flex-dir-col.hori-col-center.shadow-outline.max-400.full-width.x-small-margin.white-background
+          h2.x-small-margin.t-small-margin #{result.title}
+          .flex-dir-row.hori-row-center
+            img.thumbnail.small-margin(src=result.img, alt="Product Image")
+          h4.x-small-margin Quantity: #{result.quantity}
+          h4.x-small-margin Price: $#{result.price}
+          .flex-dir-row.hori-row-center
+            form(action="/cart/product/increase", method="post")
+              input(type="hidden", name="productId", value=result.product_id)
+              button.btn.btn-simple.x-small-btn.small-margin(type="submit")
+                i.fas.fa-plus
+                  span.next-to-icon.small-font  1
+            if result.quantity > 1
+              form(action="/cart/product/decrease", method="post")
+                input(type="hidden", name="productId", value=result.product_id)
+                button.btn.btn-simple.x-small-btn.small-margin(type="submit")
+                  i.fas.fa-minus
+                    span.next-to-icon.small-font  1
+            else
+              form(action="/cart/product/delete", method="post")
+                input(type="hidden", name="productId", value=result.product_id)
+                button.btn.btn-simple.x-small-btn.small-margin(type="submit")
+                  i.fas.fa-minus
+                    span.next-to-icon.small-font  1
 
-    h2 Total: #{cartTotal}
-    button
-      a(href= "/products") Continue shopping
-    button
-      a(href= "/checkout") Checkout
+      h2.text-center.small-padding Total: $#{cartTotal}
+      .flex-dir-row.hori-row-center.vert-row-center
+        a.a-btn.btn-submit.a-large-btn.tb-med-lr-small-margin.white-background(href= "/products") Continue Shopping
+        a.a-btn.btn-submit.a-large-btn.tb-med-lr-small-margin.white-background(href= "/checkout") Checkout
+
+include footer.pug

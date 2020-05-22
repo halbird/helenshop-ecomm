@@ -3,7 +3,9 @@ include ../head.pug
 include ../nav.pug
 
 body
-  div.flex
-    h3 You've succesfully purchased your products! (Except not really.)
-    button
-      a(href= "/products") Back to products
+  div.flex-dir-col.hori-col-center
+    h3 You've succesfully purchased your products!
+    h3 (Except not really.)
+    a.a-btn.a-large-btn.btn-submit(href= "/products") Back to Products
+
+include ../footer.pug

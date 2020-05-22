@@ -1,27 +1,48 @@
 include ../head.pug
-- let sectionTitle= "Edit Account Information"
+- let sectionTitle= "Edit Account"
 include ../nav.pug
 
 body
-  form(action="/account/edit", method="post")
-    label(for="fname") First Name
-    input(type="text", name="fname" placeholder="First Name" value=results[0].fname)
-    label(for="lname") Last Name
-    input(type="text", name="lname" placeholder="Last Name" value=results[0].lname)
-    label(for="email") Email
-    input(type="text", name="email" placeholder="Email" value=results[0].email)
-    button(type="submit") Submit Changes
-  button
-    a(href= "/account") Cancel
+  div.flex-dir-col.hori-col-center
+    div.full-width.flex-dir-col.hori-col-center.white-background.shadow-outline.max-500
+      form.flex-dir-col.hori-col-center.small-margin.max-500.width-90.tlr-medium-padding(action="/account/edit", method="post")
+        label.col-start-self.margin-left-14.t-small-margin.bold(for="fname") First Name
+        input.width-70.smaller-padding.small-margin.small-font.purple-border(type="text", name="fname" placeholder="First Name" value=results[0].fname)
+        label.col-start-self.margin-left-14.t-small-margin.bold(for="lname") Last Name
+        input.width-70.smaller-padding.small-margin.small-font.purple-border(type="text", name="lname" placeholder="Last Name" value=results[0].lname)
+        label.col-start-self.margin-left-14.t-small-margin.bold(for="email") Email
+        input.width-70.smaller-padding.small-margin.small-font.purple-border(type="text", name="email" placeholder="Email" value=results[0].email)
+        .flex-dir-row.hori-row-center.vert-row-center.width-70
+          button.tb-med-lr-small-margin.btn.btn-submit.large-btn.bold(type="submit") Submit
+          a.a-btn.btn-edit.a-medium-btn.tb-med-lr-small-margin.bold(href="/account") Cancel
+      form(action="/account/delete", method="post" onsubmit="return confirm('Are you sure you want to permanently delete your account?')")
+          input(type="hidden", name="accountId", value=results[0].user_id)
+          button.lrb-medium-margin.btn.btn-delete.medium-btn#delete-account(type="submit")
+            i.fas.fa-trash-alt  Delete
+      //- form(action="", method="post" onsubmit="return confirm('blah')")
+      //-   input(type="hidden", name="productId", value="")
+      //-   button.tb-med-lr-small-margin.btn.btn-delete.large-btn(type="submit") Change Password
+footer
+  include ../footer.pug
 
 
-  h3 This is the information we have on file for you:
-  for result in results
-    div
-      h2 First Name: #{result.fname}
-      h2 Last name: #{result.lname}
-      h2 Email: #{result.email}
 
-  h3 If you would like to change anything, please click the edit button that doesn't exist yet :)
-
-  h3 Here is where you will see products that you ahve posted for sale:
+//- body
+//-   div.flex-dir-col.hori-col-center
+//-     div.full-width.flex-dir-col.hori-col-center.white-background.shadow-outline.max-500
+//-       form.flex-dir-col.hori-col-center.small-margin.max-500.width-90.tlr-medium-padding(action="/products/" + results[0].id + "/edit", method="post")
+//-         label.col-start-self.margin-left-14.t-small-margin.bold(for="title") Product Title
+//-         input.width-70.smaller-padding.small-margin.small-font.purple-border(type="text" name="title" placeholder="Product Title" value=results[0].title)
+//-         label.col-start-self.margin-left-14.t-small-margin.bold(for="title") Product Price
+//-         input.width-70.smaller-padding.small-margin.small-font.purple-border(type="number" step="0.01" min="0" max="999999.99" name="price" placeholder="Price" value=results[0].price)
+//-         label.col-start-self.margin-left-14.t-small-margin.bold(for="title") Product Image
+//-         input.width-70.smaller-padding.small-margin.small-font.purple-border(type="text" name="img" placeholder="Image" value=results[0].img)
+//-         label.col-start-self.margin-left-14.t-small-margin.bold(for="title") Product Inventory
+//-         input.width-70.smaller-padding.small-margin.small-font.purple-border(type="number" min="0" max="10000" name="inventory" placeholder="Inventory" value=results[0].inventory)
+//-         .flex-dir-row.hori-row-center.vert-row-center.width-70
+//-           button.tb-med-lr-small-margin.btn.btn-submit.medium-btn.bold(type="submit") Submit
+//-           a.a-btn.btn-edit.a-medium-btn.tb-med-lr-small-margin.bold(href= "/products/" + results[0].id) Cancel
+//-       form(action="/products/" + results[0].id +"/delete", method="post" onsubmit="return confirm('Are you sure you want to permanently delete this product?')")
+//-         input(type="hidden", name="productId", value=results[0].id)
+//-         button.lrb-medium-margin.btn.btn-delete.medium-btn(type="submit")
+//-           i.fas.fa-trash-alt  Delete
