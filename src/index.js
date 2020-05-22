@@ -5,6 +5,7 @@ const HOST = process.env.HOST;
 const USER = process.env.USER;
 const PASSWORD = process.env.PASSWORD;
 const DATABASE = process.env.DATABASE;
+const STORESECRET = process.env.STORESECRET;
 
 
 const mysql = require("mysql");
@@ -62,7 +63,7 @@ connection.connect((err) => {
 
 const sessionStore = new MySQLStore({port: 3306},connection);
 app.use(session({
-  secret: "K4`8;`Slldq^.&83K900UyvQ:%:4M",
+  secret: STORESECRET,
   store: sessionStore,
   resave: false,
   saveUninitialized: false
