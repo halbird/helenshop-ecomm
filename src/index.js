@@ -6,6 +6,7 @@ const USER = process.env.USER;
 const PASSWORD = process.env.PASSWORD;
 const DATABASE = process.env.DATABASE;
 const STORESECRET = process.env.STORESECRET;
+const PORT = process.env.PORT || 3000;
 
 
 const mysql = require("mysql");
@@ -440,6 +441,6 @@ app.post("/products/:id/delete", isProductOwner, (req, res) => {
 });
 
 
-app.listen(3000, () => {
-  console.log("listening on port 3000");
+app.listen(PORT, () => {
+  console.log(`listening on port ${PORT}`);
 });
