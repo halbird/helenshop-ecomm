@@ -260,7 +260,7 @@ app.get("/signout", (req, res) => {
 
 // show account info
 app.get("/account", isLoggedIn, (req, res) => {
-  pool.query(`SELECT users.id AS user_id, fname, lname, email, products.id AS product_id, title, price, img, inventory FROM products JOIN users ON products.created_by = users.id`, (err, results) => {
+  pool.query(`SELECT users.id AS user_id, fname, lname, email, products.id AS product_id, title, price, img, inventory, created_by FROM products JOIN users ON products.created_by = users.id`, (err, results) => {
     if (err) console.log("error", err);
     res.render("users/account", {req, results});
   });

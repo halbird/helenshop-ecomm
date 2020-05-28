@@ -23,23 +23,27 @@ body
       .flex-dir-row.full-width.hori-row-center.small-margin
         a.a-btn.btn-submit.a-x-large-btn.white-background(href= "/products/new") 
           i.fas.fa-plus.next-to-icon  List a new product
+      
       for result in results
-        div.flex-dir-col.flow.hori-row-center.shadow-outline.small-margin.grow.small-padding.white-background
-          .flex-dir-col.full-width.hori-col-center
-            img.small-margin.thumbnail.thumbnail-600(src=result.img, alt="Product Thumbnail")
-          .flex-dir-col
-            .flex-dir-row.flow.hori-row-center
-              h4.small-margin
-                a(href="/products/" + result.product_id) #{result.title}
-            .flex-dir-row.hori-row-center
-              h4.small-margin $#{result.price.toFixed(2)}
-              h4.small-margin #{result.inventory} in stock
-            .flex-dir-row.hori-row-center.vert-row-center
-              a.a-btn.btn-edit.a-x-small-btn.tb-med-lr-small-margin(href="/products/" + result.product_id + "/edit") 
-                i.fas.fa-edit  Edit
-              form(action="/products/" + result.product_id +"/delete", method="post" onsubmit="return confirm('Are you sure you want to permanently delete this product?')")
-                input(type="hidden", name="productId", value=result.product_id)
-                button.tb-med-lr-small-margin.btn.btn-delete.x-small-btn(type="submit")
-                  i.fas.fa-trash-alt  Delete
+        if result.created_by === req.session.userId
+          div.flex-dir-col.flow.hori-row-center.shadow-outline.small-margin.grow.small-padding.white-background
+            .flex-dir-col.full-width.hori-col-center
+              img.small-margin.thumbnail.thumbnail-600(src=result.img, alt="Product Thumbnail")
+            .flex-dir-col
+              .flex-dir-row.flow.hori-row-center
+                h4.small-margin
+                  a(href="/products/" + result.product_id) #{result.title}
+              .flex-dir-row.hori-row-center
+                h4.small-margin $#{result.price.toFixed(2)}
+                h4.small-margin #{result.inventory} in stock
+              .flex-dir-row.hori-row-center.vert-row-center
+                a.a-btn.btn-edit.a-x-small-btn.tb-med-lr-small-margin(href="/products/" + result.product_id + "/edit") 
+                  i.fas.fa-edit  Edit
+                form(action="/products/" + result.product_id +"/delete", method="post" onsubmit="return confirm('Are you sure you want to permanently delete this product?')")
+                  input(type="hidden", name="productId", value=result.product_id)
+                  button.tb-med-lr-small-margin.btn.btn-delete.x-small-btn(type="submit")
+                    i.fas.fa-trash-alt  Delete
 
 include ../footer.pug
+
+//- if result.created_by === req.session.userID

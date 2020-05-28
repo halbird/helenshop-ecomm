@@ -60,11 +60,11 @@ body
             li 
               a(href="/products") Products
             li 
-              a(href="/signout") Signout
-            li 
               a(href="/cart") Cart
             li 
               a(href="/account") Account
+            li 
+              a(href="/signout") Signout
         else if req.session.anonCart || isSignedOut
           ul.mobileMenu
             li 
