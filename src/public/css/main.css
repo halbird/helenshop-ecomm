@@ -122,6 +122,9 @@ button {
 .max-400 {
   max-width: 400px;
 }
+.max-700 {
+  max-width: 700px;
+}
 
 /* IMAGES AND SHAPES */
 .thumbnail {

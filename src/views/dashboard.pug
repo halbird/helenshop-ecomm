@@ -20,25 +20,26 @@ body
 
   else
     h3.medium-font.text-center Welcome!
-    div.flex-dir-row.grow-full.flow.grow-half-600.hori-row-center
+    div.full-width.flex-dir-row.hori-row-center
+      div.flex-dir-row.grow-full.flow.grow-half-600.hori-row-center.max-700
 
-      div.rect-block-medium.flex-dir-row.vert-row-center.hori-row-center.medium-large-font.text-center.rect-block-600.small-padding.small-margin.rect-container-600
-        div.rect-block-small.shadow-outline.small-padding.small-margin.rect-block-small-600.white-background
-          a.flex-dir-col.vert-col-center.hori-col-center.medium-padding.dark-text(href="/signup")
-            i.fas.fa-user-plus
-            h3.medium-large-font.t-margin-medium Signup
-        div.rect-block-small.shadow-outline.small-padding.small-margin.rect-block-small-600.white-background
-          a.flex-dir-col.vert-col-center.hori-col-center.medium-padding.dark-text(href="/signup")
-            i.fas.fa-sign-in-alt
-            h3.medium-large-font.t-margin-medium Signin
+        div.rect-block-medium.flex-dir-row.vert-row-center.hori-row-center.medium-large-font.text-center.rect-block-600.small-padding.small-margin.rect-container-600
+          div.rect-block-small.shadow-outline.small-padding.small-margin.rect-block-small-600.white-background
+            a.flex-dir-col.vert-col-center.hori-col-center.medium-padding.dark-text(href="/signup")
+              i.fas.fa-user-plus
+              h3.medium-large-font.t-margin-medium Signup
+          div.rect-block-small.shadow-outline.small-padding.small-margin.rect-block-small-600.white-background
+            a.flex-dir-col.vert-col-center.hori-col-center.medium-padding.dark-text(href="/signup")
+              i.fas.fa-sign-in-alt
+              h3.medium-large-font.t-margin-medium Signin
 
-      div.shadow-outline.rect-block-medium.flex-dir-col.vert-col-center.hori-col-center.small-margin.small-padding.medium-large-font.text-center.rect-block-600.white-background
-        a.flex-dir-col.vert-col-center.hori-col-center.medium-padding.dark-text(href="/products")
-          i.fas.fa-store
-          h3.medium-large-font.t-margin-medium Products For Sale
-      div.shadow-outline.rect-block-medium.flex-dir-col.vert-col-center.hori-col-center.small-margin.small-padding.medium-large-font.text-center.rect-block-600.white-background
-        a.flex-dir-col.vert-col-center.hori-col-center.lr-huge-tb-med-padding.dark-text(href="/cart")
-          i.fas.fa-shopping-cart
-          h3.medium-large-font.t-margin-medium Cart
+        div.shadow-outline.rect-block-medium.flex-dir-col.vert-col-center.hori-col-center.small-margin.small-padding.medium-large-font.text-center.rect-block-600.white-background
+          a.flex-dir-col.vert-col-center.hori-col-center.medium-padding.dark-text(href="/products")
+            i.fas.fa-store
+            h3.medium-large-font.t-margin-medium Products For Sale
+        div.shadow-outline.rect-block-medium.flex-dir-col.vert-col-center.hori-col-center.small-margin.small-padding.medium-large-font.text-center.rect-block-600.white-background
+          a.flex-dir-col.vert-col-center.hori-col-center.lr-huge-tb-med-padding.dark-text(href="/cart")
+            i.fas.fa-shopping-cart
+            h3.medium-large-font.t-margin-medium Cart
 
 include footer.pug

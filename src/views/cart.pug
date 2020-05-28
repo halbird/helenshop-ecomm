@@ -16,7 +16,7 @@ body
           .flex-dir-row.hori-row-center
             img.thumbnail.small-margin(src=result.img, alt="Product Image")
           h4.x-small-margin Quantity: #{result.quantity}
-          h4.x-small-margin Price: $#{result.price}
+          h4.x-small-margin Price: $#{result.price.toFixed(2)}
           .flex-dir-row.hori-row-center
             form(action="/cart/product/increase", method="post")
               input(type="hidden", name="productId", value=result.product_id)
@@ -36,7 +36,7 @@ body
                   i.fas.fa-minus
                     span.next-to-icon.small-font  1
 
-      h2.text-center.small-padding Total: $#{cartTotal}
+      h2.text-center.small-padding Total: $#{cartTotal.toFixed(2)}
       .flex-dir-row.hori-row-center.vert-row-center
         a.a-btn.btn-submit.a-large-btn.tb-med-lr-small-margin.white-background(href= "/products") Continue Shopping
         a.a-btn.btn-submit.a-large-btn.tb-med-lr-small-margin.white-background(href= "/checkout") Checkout
