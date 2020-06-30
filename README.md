@@ -46,23 +46,29 @@ No CSS framework here; I wrote all of the CSS myself. Everything is designed to 
 - User cannot change their password or recover forgotten password
 
 ### Screenshots
-#### Dashboard for a new user:
+##### Dashboard for a new user:
 ![Screenshot of App](https://github.com/halbird/images/blob/master/dashboard.png)
+
 
 ##### Products page for a signed in user; other users' products can be added to cart, or user can edit their own products:
 ![Screenshot of App](https://github.com/halbird/images/blob/master/products.png)
 
-Account page for a signed in user; account info can be changed and user can view and edit all of their products currently available:
+
+##### Account page for a signed in user; account info can be changed and user can view and edit all of their products currently available:
 ![Screenshot of App](https://github.com/halbird/images/blob/master/account.png)
 
-Shopping cart page; quantity of each product can be increased or decreased by 1; available for signed in and anonymous users:
+
+##### Shopping cart page; quantity of each product can be increased or decreased by 1; available for signed in and anonymous users:
 ![Screenshot of App](https://github.com/halbird/images/blob/master/cart.png)
 
-Signup form for a new user; very similar to the signin form for existing users:
+
+##### Signup form for a new user; very similar to the signin form for existing users:
 ![Screenshot of App](https://github.com/halbird/images/blob/master/signup.png)
 
-Mobile version of the products page with closed toggle menu:
+
+##### Mobile version of the products page with closed toggle menu:
 ![Screenshot of App](https://github.com/halbird/images/blob/master/mobileproducts.png)
 
-Mobile version of dashboard with open toggle menu:
+
+##### Mobile version of dashboard with open toggle menu:
 ![Screenshot of App](https://github.com/halbird/images/blob/master/mobilemenu.png)
