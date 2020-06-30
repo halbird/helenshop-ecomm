@@ -46,10 +46,10 @@ No CSS framework here; I wrote all of the CSS myself. Everything is designed to 
 - User cannot change their password or recover forgotten password
 
 ### Screenshots
-Dashboard for a new user:
+#### Dashboard for a new user:
 ![Screenshot of App](https://github.com/halbird/images/blob/master/dashboard.png)
 
-Products page for a signed in user; other users' products can be added to cart, or user can edit their own products:
+##### Products page for a signed in user; other users' products can be added to cart, or user can edit their own products:
 ![Screenshot of App](https://github.com/halbird/images/blob/master/products.png)
 
 Account page for a signed in user; account info can be changed and user can view and edit all of their products currently available:
